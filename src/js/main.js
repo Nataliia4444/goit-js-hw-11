@@ -8,12 +8,15 @@ import { refs } from './refs';
 
 let page = 0;
 let query = '';
+refs.loadMore.hidden = true;
+refs.loader.style.display = 'none';
 
 // SUBMIT FORM
 refs.form.addEventListener('submit', handleFormSubmit);
 function handleFormSubmit(e) {
   e.preventDefault();
-
+  refs.loadMore.hidden = true;
+  refs.loader.style.display = 'block';
   query = e.target.elements.searchQuery.value;
   page = 1;
 
@@ -23,8 +26,7 @@ function handleFormSubmit(e) {
       if (data.total === 0) {
         page = 0;
         refs.searchBtn.disabled = true;
-        refs.loadMore.classList.replace('show-load-more', 'hidden');
-
+        refs.loader.style.display = 'none';
         iziToast.error({
           message:
             'Sorry, there are no images matching your search query. Please try again!',
@@ -33,9 +35,9 @@ function handleFormSubmit(e) {
       }
 
       //   ADD MARKUP
+      refs.loader.style.display = 'none';
       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-
-      refs.loadMore.classList.replace('hidden', 'show-load-more');
+      refs.loadMore.hidden = false;
 
       // SIMPLELIGHTBOX
       const lightbox = new SimpleLightbox('.gallery a', {
@@ -50,7 +52,8 @@ function handleFormSubmit(e) {
     })
 
     .catch(() => {
-      refs.loadMore.classList.replace('show-load-more', 'hidden');
+      refs.loadMore.hidden = true;
+      refs.loader.style.display = 'none';
       iziToast.error({
         message:
           'Sorry, there are no images matching your search query. Please try again!',
@@ -68,18 +71,22 @@ function handleFormSubmit(e) {
 refs.loadMore.addEventListener('click', handleOnLoadMore);
 function handleOnLoadMore() {
   page += 1;
+
   getImage(query, page)
     .then(data => {
       if (data.totalHits < page) {
-        refs.loadMore.classList.replace('show-load-more', 'hidden');
+        refs.loadMore.hidden = true;
+
         iziToast.warning({
           message: 'Sorry, the images have run out',
         });
       }
+
       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
     })
     .catch(() => {
-      refs.loadMore.classList.replace('show-load-more', 'hidden');
+      refs.loadMore.hidden = true;
+
       iziToast.warning({
         message: 'Sorry, the images have run out',
       });

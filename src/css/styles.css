@@ -25,17 +25,7 @@ body {
 }
 
 body {
-  background: rgb(255, 255, 255);
-    /* background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(236, 228, 202, 0.8128501400560224) 91%); */
-  /* background-color: white;
-  background: rgb(0, 20, 36);
-    background: linear-gradient(90deg, rgba(0, 20, 36, 1) 0%, rgba(9, 36, 121, 0) 0%, rgba(96, 98, 147, 0.8044467787114846) 78%); */
-  /* background: rgb(0, 36, 8);
-    background: linear-gradient(90deg, rgba(0, 36, 8, 1) 0%, rgba(9, 121, 31, 0) 0%, rgba(31, 18, 81, 0.15458683473389356) 78%); */
-    /* background: rgb(17, 0, 36);
-      background: linear-gradient(90deg, rgba(17, 0, 36, 0) 0%, rgba(58, 9, 121, 0) 0%, rgba(31, 18, 81, 0.8408613445378151) 80%); */
-      /* background: rgb(255, 255, 255);
-        background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0) 0%, rgba(236, 228, 202, 0.3226540616246498) 80%); */
+  background: rgb(214, 209, 209);
   font-family: -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;
   color: var(--grey-text);
 
@@ -63,19 +53,10 @@ h6 {
 
 
 .product-card {
-  /* width: 100%; */
-  /* width: 270px; */
   width: 350px;
-  /* height: 500px; */
-  /* overflow: hidden; */
-
   border-radius: 5px;
-  /* border-top: 20px;
-    border-color: #ffffff; */
   background-color: rgba(218, 217, 225, 0.636);
-  /* margin: 20px; */
   overflow: hidden;
-  /* padding: 20px 45px; */
   padding-top: 0px;
   position: relative;
   border: 8px solid #ffffff;
@@ -92,14 +73,9 @@ h6 {
   font-size: 14px;
 }
 
-/*   
-  .main{
-    margin-top: 10px
-  } */
 
 .main img {
   max-width: 100%;
-  /* width: 270px; */
   height: 320px;
   object-fit: cover;
   overflow: hidden;
@@ -209,41 +185,32 @@ background-color: #1e2144;
   margin: 0 auto;
   margin-top: 40px;
   margin-bottom: 40px;
-  display: block;
+
 
 }
 
 
 
 .loader {
-  width: 16px;
-  height: 16px;
+  width: 48px;
+  height: 48px;
+  border: 5px solid;
+  border-color: #0f0522 transparent;
   border-radius: 50%;
-  display: block;
-  margin: 15px auto;
-  position: relative;
-  background: #FFF;
-  box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+  display: inline-block;
   box-sizing: border-box;
-  animation: shadowPulse 2s linear infinite;
+  animation: rotation 1s linear infinite;
+  margin: 0 auto;
+  display: block;
+  margin-top: 20%;
 }
 
-@keyframes shadowPulse {
-  33% {
-    background: #FFF;
-    box-shadow: -24px 0 #FF3D00, 24px 0 #FFF;
-  }
-
-  66% {
-    background: #FF3D00;
-    box-shadow: -24px 0 #FFF, 24px 0 #FFF;
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
   }
 
   100% {
-    background: #FFF;
-    box-shadow: -24px 0 #FFF, 24px 0 #FF3D00;
+    transform: rotate(360deg);
   }
-}
-.hidden {
-  display: none;
 }
