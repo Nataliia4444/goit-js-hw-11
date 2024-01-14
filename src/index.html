@@ -1,15 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
-    <link rel="stylesheet" href="./css/styles.css" />
-  </head>
-  <body>
-   
 
-    <script type="module" src="./main.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixabay</title>
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body>
+  <form class="search-form" id="search-form">
+    <div class="input-group">
+      <div class="input-group2">
+        <label>
+          <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..."
+            class="search-field" />
+        </label>
+        <button type="submit" class="rstore-domain-search-button search-submit btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+<!-- <span class="loader-js loader"></span> -->
+  <div class="gallery">
+    <!-- Карточки изображений -->
+  </div>
+  <button type="button" class="load-more hidden">Load more</button>
+  <script src="./js/main.js" type="module"></script>
+</body>
+
 </html>
