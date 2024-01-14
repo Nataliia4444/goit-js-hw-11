@@ -1,17 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/goit-js-hw-11/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vanilla App Template</title>
-    
-    <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
-    <link rel="stylesheet" href="/goit-js-hw-11/assets/index-10c40100.css">
-  </head>
-  <body>
-   
 
-    
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pixabay</title>
+  
+  <script type="module" crossorigin src="/goit-js-hw-11/commonHelpers.js"></script>
+  <link rel="modulepreload" crossorigin href="/goit-js-hw-11/assets/vendor-afa10da7.js">
+  <link rel="stylesheet" href="/goit-js-hw-11/assets/vendor-eb6030bc.css">
+  <link rel="stylesheet" href="/goit-js-hw-11/assets/index-de45a431.css">
+</head>
+
+<body>
+  <form class="search-form" id="search-form">
+    <div class="input-group">
+      <div class="input-group2">
+        <label>
+          <input type="text" name="searchQuery" autocomplete="off" placeholder="Search images..."
+            class="search-field" />
+        </label>
+        <button type="submit" class="rstore-domain-search-button search-submit btn btn-primary">Search</button>
+      </div>
+    </div>
+  </form>
+<!-- <span class="loader-js loader"></span> -->
+
+  <div class="gallery">
+    <!-- Карточки изображений -->
+  </div>
+  <button type="button" class="show-load-more" hidden>Load more</button>
+  <span class="loader"></span>
+  
+</body>
+
 </html>
