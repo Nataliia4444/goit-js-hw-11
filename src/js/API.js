@@ -6,7 +6,7 @@ function getImage(q, pag = 1) {
     orientation: 'horizontal',
     savesearch: 'true',
     page: pag,
-    per_page: 10,
+    per_page: 20,
   });
   const URL = 'https://pixabay.com/api/';
   return fetch(`${URL}?${params}`).then(resp => {
