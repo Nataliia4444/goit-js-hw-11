@@ -73,34 +73,34 @@ function handleFormSubmit(e) {
 }
 
 // LOAD MORE
-refs.loadMore.addEventListener('click', handleOnLoadMore);
-function handleOnLoadMore() {
-  page += 1;
+// refs.loadMore.addEventListener('click', handleOnLoadMore);
+// function handleOnLoadMore() {
+//   page += 1;
 
-  getImage(query, page)
-    .then(data => {
-      if (data.totalHits < page) {
-        refs.loadMore.hidden = true;
+//   getImage(query, page)
+//     .then(data => {
+//       if (data.totalHits < page) {
+//         refs.loadMore.hidden = true;
 
-        iziToast.warning({
-          message: 'Sorry, the images have run out',
-        });
-      }
+//         iziToast.warning({
+//           message: 'Sorry, the images have run out',
+//         });
+//       }
 
-      refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-      lightbox.on('show.simplelightbox', function (e) {
-        e.preventDefault();
-      });
-      lightbox.refresh = function () {
-        lightbox.destroy();
-      };
-    })
-    .catch(() => {
-      refs.loadMore.hidden = true;
+//       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+//       lightbox.on('show.simplelightbox', function (e) {
+//         e.preventDefault();
+//       });
+//       lightbox.refresh = function () {
+//         lightbox.destroy();
+//       };
+//     })
+//     .catch(() => {
+//       refs.loadMore.hidden = true;
 
-      iziToast.warning({
-        message: 'Sorry, the images have run out',
-      });
-    })
-    .finally(() => {});
-}
+//       iziToast.warning({
+//         message: 'Sorry, the images have run out',
+//       });
+//     })
+//     .finally(() => {});
+// }
