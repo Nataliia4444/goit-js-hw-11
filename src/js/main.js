@@ -17,7 +17,8 @@ function handleFormSubmit(e) {
   e.preventDefault();
   refs.loadMore.hidden = true;
   refs.loader.style.display = 'block';
-  query = e.target.elements.searchQuery.value;
+  // console.log(e.currentTarget.searchQuery.value);
+  query = e.currentTarget.searchQuery.value;
   page = 1;
 
   // API PIXABAY
