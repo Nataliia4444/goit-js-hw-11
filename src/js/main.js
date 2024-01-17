@@ -1,4 +1,7 @@
 import iziToast from 'izitoast';
+import SimpleLightbox from 'simplelightbox';
+// Додатковий імпорт стилів
+import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'izitoast/dist/css/iziToast.min.css';
 // import SimpleLightbox from 'simplelightbox/dist/simple-lightbox.esm';
 // import 'simplelightbox/dist/simple-lightbox.min.css';
@@ -31,15 +34,15 @@ function handleFormSubmit(e) {
       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
       // refs.loadMore.hidden = true;
       // refs.loadMore.hidden = false;
-      // const lightbox = new SimpleLightbox('.gallery a', {
-      //   captions: true,
-      //   captionsData: 'alt',
-      //   captionPosition: 'bottom',
-      //   captionDeloy: 250,
-      // });
-      // lightbox.on('show.simplelightbox', function (e) {
-      //   e.preventDefault();
-      // });
+      const lightbox = new SimpleLightbox('.gallery a', {
+        captions: true,
+        captionsData: 'alt',
+        captionPosition: 'bottom',
+        captionDeloy: 250,
+      });
+      lightbox.on('show.simplelightbox', function (e) {
+        e.preventDefault();
+      });
     })
 
     .catch(() => {
