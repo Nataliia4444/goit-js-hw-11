@@ -5,17 +5,17 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 import { createMarkup } from './markup';
 import { getImage } from './API';
 import { refs } from './refs';
-
+let lightbox = '';
 let page = 0;
 let query = '';
-// refs.loadMore.hidden = true;
+refs.loadMore.hidden = true;
 refs.loader.style.display = 'none';
 
 // SUBMIT FORM
 refs.form.addEventListener('submit', handleFormSubmit);
 function handleFormSubmit(e) {
   e.preventDefault();
-  // refs.loadMore.hidden = true;
+  refs.loadMore.hidden = true;
   refs.loader.style.display = 'block';
   query = e.target.elements.searchQuery.value;
   page = 1;
@@ -37,25 +37,27 @@ function handleFormSubmit(e) {
       //   ADD MARKUP
       refs.loader.style.display = 'none';
       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-      // refs.loadMore.hidden = false;
+      refs.loadMore.hidden = false;
 
       // SIMPLELIGHTBOX
-      const lightbox = new SimpleLightbox('.gallery a', {
+      lightbox = new SimpleLightbox('.gallery a', {
         captions: true,
         captionsData: 'alt',
         captionPosition: 'bottom',
         captionDeloy: 250,
       });
-      // lightbox.refresh('show.simplelightbox', function (e) {
-      //   e.preventDefault();
-      // });
+
       lightbox.on('show.simplelightbox', function (e) {
         e.preventDefault();
       });
+      lightbox.refresh = function () {
+        e.preventDefault();
+        lightbox.destroy();
+      };
     })
 
     .catch(() => {
-      // refs.loadMore.hidden = true;
+      refs.loadMore.hidden = true;
       refs.loader.style.display = 'none';
       iziToast.error({
         message:
@@ -71,28 +73,34 @@ function handleFormSubmit(e) {
 }
 
 // LOAD MORE
-// refs.loadMore.addEventListener('click', handleOnLoadMore);
-// function handleOnLoadMore() {
-//   page += 1;
+refs.loadMore.addEventListener('click', handleOnLoadMore);
+function handleOnLoadMore() {
+  page += 1;
 
-//   getImage(query, page)
-//     .then(data => {
-//       if (data.totalHits < page) {
-//         refs.loadMore.hidden = true;
+  getImage(query, page)
+    .then(data => {
+      if (data.totalHits < page) {
+        refs.loadMore.hidden = true;
 
-//         iziToast.warning({
-//           message: 'Sorry, the images have run out',
-//         });
-//       }
+        iziToast.warning({
+          message: 'Sorry, the images have run out',
+        });
+      }
 
-//       refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
-//     })
-//     .catch(() => {
-//       refs.loadMore.hidden = true;
+      refs.gallery.insertAdjacentHTML('beforeend', createMarkup(data.hits));
+      lightbox.on('show.simplelightbox', function (e) {
+        e.preventDefault();
+      });
+      lightbox.refresh = function () {
+        lightbox.destroy();
+      };
+    })
+    .catch(() => {
+      refs.loadMore.hidden = true;
 
-//       iziToast.warning({
-//         message: 'Sorry, the images have run out',
-//       });
-//     })
-//     .finally(() => {});
-// }
+      iziToast.warning({
+        message: 'Sorry, the images have run out',
+      });
+    })
+    .finally(() => {});
+}
