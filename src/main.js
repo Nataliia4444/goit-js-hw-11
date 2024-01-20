@@ -2,9 +2,14 @@ import iziToast from 'izitoast';
 import SimpleLightbox from 'simplelightbox';
 import 'simplelightbox/dist/simple-lightbox.min.css';
 import 'izitoast/dist/css/iziToast.min.css';
-import { createMarkup } from './markup';
-import { getImage } from './API';
-import { refs } from './refs';
+
+// REFS
+const refs = {
+  form: document.querySelector('.search-form'),
+  gallery: document.querySelector('.gallery'),
+  searchBtn: document.querySelector('.search-submit '),
+  loader: document.querySelector('.loader'),
+};
 
 let page = 0;
 let query = '';
@@ -62,4 +67,63 @@ function handleFormSubmit(e) {
     });
 
   refs.gallery.innerHTML = '';
+}
+
+// MARKUP CARD
+function createMarkup(date) {
+  return date
+    .map(
+      ({
+        downloads,
+        likes,
+        webformatURL,
+        largeImageURL,
+        tags,
+        views,
+        comments,
+      }) => `
+        <div class="product-card main">
+        <div class="main">
+        <a href="${largeImageURL}" >
+        <img src=${webformatURL} alt="${tags}" loading="lazy" />
+        </a>
+        <div class="info">
+          <p class="info-item">
+            <b>Likes: ${likes}</b>
+          </p>
+          <p class="info-item">
+            <b>Views: ${views}</b>
+          </p>
+          <p class="info-item">
+            <b>Comments: ${comments}</b>
+          </p>
+          <p class="info-item">
+            <b>Downloads: ${downloads}</b>
+          </p>
+        </div></div>
+       
+        </div>
+         `
+    )
+    .join('');
+}
+
+// API
+function getImage(q, pag = 1) {
+  const params = new URLSearchParams({
+    key: '39036273-6668926e4f0bebacaced31faa',
+    q,
+    image_type: 'photo',
+    orientation: 'horizontal',
+    savesearch: 'true',
+    page: pag,
+    per_page: 20,
+  });
+  const URL = 'https://pixabay.com/api/';
+  return fetch(`${URL}?${params}`).then(resp => {
+    if (!resp.ok) {
+      throw new Error();
+    }
+    return resp.json();
+  });
 }
